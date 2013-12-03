@@ -1,0 +1,32 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-libwmf"
+VERSION=0.2.8.4
+RELEASE=2
+CATEGORY="Devel"
+SUMMARY="Windows Metafile library for Win64 toolchain"
+DESCRIPTION="libwmf is a library for reading vector images in Microsoft's native
+Windows Metafile Format (WMF) and for either displaying them or converting them
+to more standard/open file formats such as SVG format."
+HOMEPAGE="http://wvware.sourceforge.net/"
+SRC_URI="mirror://sourceforge/wvware/libwmf-${VERSION}.tar.gz"
+SRC_DIR="libwmf-${VERSION}"
+PATCH_URI="0.2.8.4-automake.patch"
+
+DIFF_EXCLUDES="wmfconfig.h.in"
+
+CYGCONF_ARGS="
+	--with-expat
+	--with-freetype
+	--with-zlib
+	--with-png
+	--with-jpeg
+	--without-x
+"
+
+src_install() {
+	cd ${B}
+	cyginstall bin_PROGRAMS= loaderdir=$($PKG_CONFIG --variable=gdk_pixbuf_moduledir gdk-pixbuf-2.0)
+	rm -fr ${D}${CROSS_DATADIR}/doc/
+}
