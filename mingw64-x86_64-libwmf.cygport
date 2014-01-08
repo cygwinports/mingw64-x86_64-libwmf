@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-x86_64-libwmf"
 VERSION=0.2.8.4
-RELEASE=2
+RELEASE=3
 CATEGORY="Devel"
 SUMMARY="Windows Metafile library for Win64 toolchain"
 DESCRIPTION="libwmf is a library for reading vector images in Microsoft's native
